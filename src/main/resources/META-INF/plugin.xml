@@ -1,0 +1,39 @@
+<idea-plugin>
+    <id>com.trofimovAS.DocTranslatorPlugin</id>
+    <name>DocTranslatorPlugin</name>
+    <vendor email="sanechchichek.trofimov@gmail.com"/>
+    <depends>com.intellij.modules.platform</depends>
+    <extensionPoints>
+        <extensionPoint name="translatorApiProvider"
+                        interface="com.trofimovas.doctranslatorplugin.application.interfaces.ITraslatorApiProvider"/>
+        <extensionPoint name="documentationPresenter"
+                        interface="com.trofimovas.doctranslatorplugin.application.interfaces.IDocumentationPresenter"/>
+    </extensionPoints>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <documentationProvider
+                implementation="com.trofimovas.doctranslatorplugin.infrastructure.documentationProviders.JavaDocumentationProvider"/>
+
+    </extensions>
+
+    <extensions defaultExtensionNs="com.trofimovAS.DocTranslatorPlugin">
+        <documentationPresenter
+                implementation="com.trofimovas.doctranslatorplugin.presentation.DocumentationWindowPresenter"/>
+        <translatorApiProvider
+                implementation="com.trofimovas.doctranslatorplugin.infrastructure.traslatorApiProviders.MicrosoftAzureTranslatorApiProvider"/>
+<!--   <translatorApiProvider-->
+<!--                implementation="com.trofimovas.doctranslatorplugin.infrastructure.traslatorApiProviders.GoogleTranslateApiProvider"/>-->
+
+    </extensions>
+
+    <actions>
+        <action id="com.trofimovas.doctranslatorplugin.presentation.actions.TranslateAction"
+                class="com.trofimovas.doctranslatorplugin.presentation.actions.TranslateAction"
+                text="TranslateAction">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl K" second-keystroke="ctrl K"/>
+            <mouse-shortcut keymap="$default" keystroke="alt button1"/>
+        </action>
+    </actions>
+
+</idea-plugin>
